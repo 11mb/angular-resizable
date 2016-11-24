@@ -1,0 +1,5 @@
+<ng-content></ng-content>
+
+<div *ngFor='let direction of directions' [class]="'rg-' + direction">
+    <span dragHandle (onDragStart)="dragStart($event, direction);" (onDragEnd)="dragEnd($event)" (onDrag)="dragging($event)"></span>
+</div>

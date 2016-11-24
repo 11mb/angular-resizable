@@ -1,12 +1,13 @@
 {
-  "name": "angular-resizable",
-  "version": "1.2.0",
-  "homepage": "https://github.com/Reklino/angular-resizable",
+  "name": "angular2-resizable",
+  "version": "2.0.0",
+  "homepage": "https://github.com/11mb/angular-resizable",
   "authors": [
-    "Reklino <yakub89@gmail.com>"
+    "Reklino <yakub89@gmail.com>",
+    "William <11mb.william@gmail.com>"
   ],
-  "description": "A lightweight directive for creating resizable containers in angularjs",
-  "main": "src/angular-resizable.js",
+  "description": "A lightweight directive for creating resizable containers in angular 2",
+  "main": "resizable.module.ts",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -21,6 +22,13 @@
     "gulpfile.js"
   ],
   "dependencies": {
-    "angular": "~1.*"
+    "@angular/common": "2.2.1",
+    "@angular/compiler": "2.2.1",
+    "@angular/core": "2.2.1",
+    "@angular/platform-browser": "2.2.1",
+    "@angular/platform-browser-dynamic": "2.2.1",
+    "core-js": "^2.4.1",
+    "ts-helpers": "^1.1.1",
+    "zone.js": "^0.6.23"
   }
 }

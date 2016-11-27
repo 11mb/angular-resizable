@@ -2,7 +2,7 @@
 
 <div *ngFor='let direction of directions'
      [class]="'rg-' + direction"
-     dragHandle (onDragStart)="dragStart($event, direction);"
+     drag-handle (onDragStart)="dragStart($event, direction);"
      (onDragEnd)="dragEnd($event)"
      (onDrag)="dragging($event)">
     <span></span>

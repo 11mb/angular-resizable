@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 
 
 @Directive({
-    selector: '[dragHandle]',
+    selector: '[drag-handle]',
     providers: [ { provide: DOCUMENT, useValue: document } ],
 })
 export class DragDirective {

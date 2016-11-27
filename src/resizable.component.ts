@@ -1,8 +1,5 @@
-import { Component, ElementRef, HostBinding, Input, Inject, ViewEncapsulation } from '@angular/core';
-
+import { Component, ElementRef, HostBinding, Input, Inject, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { DragDirective } from './drag.directive.ts';
-
-
 
 @Component({
     selector: 'region-compoment',
@@ -23,6 +20,10 @@ export class RegionComponent {
     @Input() directions;
     @Input() rFlex = false;
 
+    @Output() resizeStart = new EventEmitter();
+    @Output() resizing = new EventEmitter();
+    @Output() resizeEnd = new EventEmitter();
+
     private regionElement;
     private nativeElement;
 
@@ -36,9 +37,6 @@ export class RegionComponent {
     private vx = 1;
     private vy = 1;
 
-    //private width;
-    //private height;
-
     private start;
 
     private dragDir;
@@ -48,8 +46,6 @@ export class RegionComponent {
     private info = {};
 
     private flexBasis;
-
-    // private toCall;
 
     constructor(private regionElement: ElementRef, @Inject(Window) private window: Window) {
         this.nativeElement = this.regionElement.nativeElement;
@@ -74,7 +70,6 @@ export class RegionComponent {
     };
 
     private dragStart(e, direction) {
-        console.log('in dragStart');
         let mouseEvent = e.originalEvent;
 
         this.dragDir = direction;
@@ -82,6 +77,8 @@ export class RegionComponent {
         this.start = (this.axis === 'x' ? mouseEvent.clientX : mouseEvent.clientY);
         this.w = parseInt(this.style.getPropertyValue('width'));
         this.h = parseInt(this.style.getPropertyValue('height'));
+
+        this.resizeStart.emit({ info: this.info });
 
         //prevent transition while dragging
         this.noTransition = true;
@@ -91,6 +88,7 @@ export class RegionComponent {
         let mouseEvent = e.originalEvent;
 
         this.updateInfo(mouseEvent);
+        this.resizeEnd.emit({ info: this.info });
         this.noTransition = false;
     }
 
@@ -125,22 +123,6 @@ export class RegionComponent {
 
         }
         this.updateInfo(mouseEvent);
-        //this.throttle(function() { scope.$emit('angular-resizable.resizing', info);});
-
-
+        this.resizing.emit({ info: this.info });
     }
-
-    // private throttle(fun) {
-    //     if (this.toCall === undefined) {
-    //         this.toCall = fun;
-    //         setTimeout(function () {
-    //             this.toCall();
-    //             this.toCall = undefined;
-    //         }, 100);
-    //     } else {
-    //         this.toCall = fun;
-    //     }
-    // }
-
-
 }
